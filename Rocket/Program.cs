@@ -1,10 +1,11 @@
+using Microsoft.EntityFrameworkCore;
 using Rocket.DataAccess;
 using Rocket.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddDbContext<RocketDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IPersonDatabaseAccess, PersonDatabaseAccess>();
 builder.Services.AddSingleton<PersonService>();// eine instanz für alle konsumenten
