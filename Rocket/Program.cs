@@ -7,8 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<RocketDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IPersonDatabaseAccess, PersonDbContext>();
-builder.Services.AddSingleton<PersonService>();// Singleton: eine instanz für alle konsumenten
+builder.Services.AddScoped<IPersonDatabaseAccess, PersonDatabaseAccessEntityFramework>();
+builder.Services.AddScoped<PersonService>();// Singleton: eine instanz für alle konsumenten
 //builder.Services.AddTransient<PersonService>(); // jeder konsument erhält seine eigne instanz
 //builder.Services.AddScoped<PersonService>(); // jeder rest call bekommt ein und die selbe instanz
 
