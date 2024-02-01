@@ -9,23 +9,22 @@ public class PersonDatabaseAccessEntityFramework : IPersonDatabaseAccess
         _rocketDbContext = rocketDbContext;
     }
 
-    public IEnumerable<Person> GetPersons()
+    public async Task<IEnumerable<Person>> GetPersonsAsync()
     {
-        //async?
-        return _rocketDbContext.Persons;
+        throw new NotImplementedException(); 
+        //return await _rocketDbContext.Persons;
     }
 
-    public async Task<Person> AddPerson(Person person)
+    public async Task<Person> AddPersonAsync(Person person)
     {
-        _rocketDbContext.Persons.Add(person);
+        await _rocketDbContext.Persons.AddAsync(person);
         await _rocketDbContext.SaveChangesAsync();
         return person;
     }
 
-    public async Task<Person> RemovePerson(Person person)
+    public async Task RemovePersonAsync(Person person)
     {
         _rocketDbContext.Remove(person);
         await _rocketDbContext.SaveChangesAsync();
-        return person;
     }
 }

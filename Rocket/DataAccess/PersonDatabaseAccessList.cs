@@ -8,21 +8,22 @@ namespace Rocket.DataAccess
     {
         private readonly List<Person> _persons = new();
 
-        public IEnumerable<Person> GetPersons()
+        public async Task<IEnumerable<Person>> GetPersonsAsync()
         {
-            return _persons;
+            IEnumerable<Person> persons = _persons; // das soll nicht so sein... List --> IEnumerable
+            return await Task.FromResult(persons);
         }
-
-        public Task<Person> AddPerson(Person person)
+ 
+        public async Task<Person> AddPersonAsync(Person person)
         {
             _persons.Add(person);
-            return Task.FromResult(person);
+            return await Task.FromResult(person);
         }
-
-        public Task<Person> RemovePerson(Person person)
+        
+        public async Task RemovePersonAsync(Person person)
         {
             _persons.Remove(person);
-            return Task.FromResult(person);
+            await Task.CompletedTask;
         }
     }
 }

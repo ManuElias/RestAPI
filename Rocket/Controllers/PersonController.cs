@@ -15,45 +15,28 @@ namespace Rocket.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Person> Get()
+        public async Task<IEnumerable<Person>> GetAsync()
         {
-            return _personService.GetPersons();
+            return await _personService.GetPersonsAsync();
         }
 
         [HttpGet("{personId}")]
-        public Person Get(int personId)
+        public async Task<Person> GetAsync(int personId)
         {
-            return _personService.GetPerson(personId);
-        }
-
-        [HttpPost("search")]
-        public IEnumerable<Person> Search(SearchPerson searchPerson)
-        {
-            return _personService.GetPersonsByFirstName(searchPerson.FirstName, searchPerson.LastName);
+            return await _personService.GetPersonAsync(personId);
         }
 
         [HttpPost]
-        public Person Create(int id, string firstName, string lastName)
+        public async Task<Person> CreateAsync(int id, string firstName, string lastName)
         {
-            return _personService.CreatePerson(id, firstName, lastName);
+            return await _personService.CreatePersonAsync(id, firstName, lastName);
         }
 
         [HttpDelete]
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            _personService.DeletePerson(id);
+            await _personService.DeletePersonAsync(id);
         }
     }
 
-    public class SearchPerson
-    {
-        public string? FirstName { get; }
-        public string? LastName { get; }
-
-        public SearchPerson(string? firstName, string? lastName)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-        }
-    }
 }

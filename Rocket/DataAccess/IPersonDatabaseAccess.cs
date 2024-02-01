@@ -2,8 +2,8 @@
 
 public interface IPersonDatabaseAccess
 {
-    IEnumerable<Person> GetPersons();
-    Task<Person> AddPerson(Person person);
+    Task<IEnumerable<Person>> GetPersonsAsync();
+    Task<Person> AddPersonAsync(Person person);
 
-    Task<Person> RemovePerson(Person person);
+    Task RemovePersonAsync(Person person);
 }
