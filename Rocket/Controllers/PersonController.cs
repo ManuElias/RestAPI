@@ -27,9 +27,9 @@ namespace Rocket.Controllers
         }
 
         [HttpPost]
-        public async Task<Person> CreateAsync(int id, string firstName, string lastName)
+        public async Task<Person> CreateAsync(string firstName, string lastName)
         {
-            return await _personService.CreatePersonAsync(id, firstName, lastName);
+            return await _personService.CreatePersonAsync(firstName, lastName);
         }
 
         [HttpDelete]

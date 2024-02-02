@@ -9,10 +9,9 @@ public class PersonDatabaseAccessEntityFramework : IPersonDatabaseAccess
         _rocketDbContext = rocketDbContext;
     }
 
-    public async Task<IEnumerable<Person>> GetPersonsAsync()
+    public Task<IEnumerable<Person>> GetPersonsAsync()
     {
-        throw new NotImplementedException(); 
-        //return await _rocketDbContext.Persons;
+        return Task.FromResult(_rocketDbContext.Persons.AsEnumerable());
     }
 
     public async Task<Person> AddPersonAsync(Person person)
