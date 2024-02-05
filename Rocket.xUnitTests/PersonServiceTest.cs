@@ -15,22 +15,21 @@ public class PersonServiceTest
 
     public PersonServiceTest()
     {
-        _personDatabaseAccess.GetPersons().Returns(CreatePersons());
-        
+        _personDatabaseAccess.GetPersonsAsync().Returns(CreatePersons());
         _testObject = new(_personDatabaseAccess, _logger);
     }
 
     [Fact]
-    public void Test()
+    public async Task Test()
     {
-        var persons = _testObject.GetPersonsByFirstName(string.Empty, "Eli");
+        var persons = await _testObject.GetPersonsByFirstNameAsync(string.Empty, "Eli");
         Assert.Equal(4, persons.Count());
     }
 
     [Fact]
-    public void Test2()
+    public async Task Test2()
     { 
-        _testObject.GetPersons();
+        await _testObject.GetPersonsAsync();
         _logger.Received().LogInformation("Huhu someone logged here.");
     }
 
