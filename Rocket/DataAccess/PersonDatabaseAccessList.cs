@@ -10,8 +10,7 @@ namespace Rocket.DataAccess
 
         public async Task<IEnumerable<Person>> GetPersonsAsync()
         {
-            IEnumerable<Person> persons = _persons; // das soll nicht so sein... List --> IEnumerable
-            return await Task.FromResult(persons);
+            return await Task.FromResult(_persons.AsEnumerable());
         }
  
         public async Task<Person> AddPersonAsync(Person person)

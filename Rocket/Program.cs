@@ -5,8 +5,8 @@ using Rocket.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//builder.Services.AddDbContext<RocketDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<RocketDbContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
+builder.Services.AddDbContext<RocketDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//builder.Services.AddDbContext<RocketDbContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
 builder.Services.AddControllers();
 builder.Services.AddScoped<IPersonDatabaseAccess, PersonDatabaseAccessEntityFramework>(); //PersonDatabaseAccessList
 builder.Services.AddScoped<PersonService>();// Singleton: eine instanz für alle konsumenten

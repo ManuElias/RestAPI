@@ -1,4 +1,5 @@
 ﻿using Rocket.DataAccess;
+using System.Linq;
 
 namespace Rocket.Services
 {
@@ -22,18 +23,30 @@ namespace Rocket.Services
 
         public async Task<IEnumerable<Person>> GetPersonsByFirstNameAsync(string? firstName, string? lastName)
         {
-            // In eine schöne sehr schöne linq query umschreiben!
-            var persons = await _personDatabaseAccess.GetPersonsAsync();//.ToArray();
-            if (!string.IsNullOrEmpty(firstName))
-            {
-                persons = persons.Where(p => p.FirstName.Contains(firstName)).ToArray();
-            }
+            var persons = await _personDatabaseAccess.GetPersonsAsync();
 
-            if (!string.IsNullOrEmpty(lastName))
-            {
-                persons = persons.Where(p => p.LastName.Contains(lastName)).ToArray();
-            }
+            //Option 1
+            /*
+            persons = persons.Where(x => !string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName))
+                             .Where(p => p.FirstName.Contains(firstName) && p.LastName.Contains(lastName))
+                             .ToArray();
+            */
 
+            //Option 2 (Was tun wenn Null or Empty?)
+            /*
+            persons = string.IsNullOrEmpty(firstName) ? persons : 
+                                string.IsNullOrEmpty(lastName) ? persons :
+                                        persons.Where(p => p.FirstName == firstName && p.LastName == lastName);
+            */
+            
+            // Option 3
+            if (!string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName))
+            {
+                persons = persons.Where(p => p.FirstName.Contains(firstName) 
+                                 && p.LastName.Contains(lastName)).ToArray();
+
+            }
+            // else?
             return persons;
         }
 
