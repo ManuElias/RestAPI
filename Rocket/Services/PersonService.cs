@@ -20,7 +20,7 @@ namespace Rocket.Services
             return allPersons.ToList().Single(person => person.Id == id);
         }
 
-        public async Task<IEnumerable<Person>> GetPersonsByFirstNameAsync(string? firstName, string? lastName)
+        public async Task<IEnumerable<Person>> GetPersonsByFirstName(string? firstName, string? lastName)
         {
             // In eine schöne sehr schöne linq query umschreiben!
             var persons = await _personDatabaseAccess.GetPersonsAsync();//.ToArray();
@@ -47,8 +47,8 @@ namespace Rocket.Services
         public async Task<Person> CreatePersonAsync(string firstName, string lastName)
         {
             var item = new Person(0, firstName, lastName);
-            await _personDatabaseAccess.AddPersonAsync(item);
-            return item;
+            var addedPerson = await _personDatabaseAccess.AddPersonAsync(item);
+            return addedPerson;
         }
 
         public async Task DeletePersonAsync(int id)
