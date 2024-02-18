@@ -22,7 +22,7 @@ public class PersonServiceTest
     [Fact]
     public async Task Test()
     {
-        var persons = await _testObject.GetPersonsByFirstNameAsync(string.Empty, "Eli");
+        var persons = await _testObject.GetPersonsByFirstName(string.Empty, "Eli");
         Assert.Equal(4, persons.Count());
     }
 
