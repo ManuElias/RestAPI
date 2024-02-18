@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 //builder.Services.AddDbContext<RocketDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddSingleton<RocketListContext>();
-builder.Services.
 builder.Services.AddDbContext<RocketDbContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
 builder.Services.AddControllers();
 builder.Services.AddScoped<IPersonDatabaseAccess, PersonDatabaseAccessList>(); //PersonDatabaseAccessList
