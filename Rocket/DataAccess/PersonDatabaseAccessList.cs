@@ -12,7 +12,7 @@
 
         public async Task<IEnumerable<Person>> GetPersonsAsync()
         {
-            IEnumerable<Person> persons = _rocketListContext.GetPersons(); // das soll nicht so sein... List --> IEnumerable
+            IEnumerable<Person> persons = _rocketListContext.GetPersons();
             return await Task.FromResult(persons);
         }
  

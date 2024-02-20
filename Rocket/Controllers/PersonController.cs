@@ -21,7 +21,7 @@ namespace Rocket.Controllers
         }
 
         [HttpGet("{personId}")]
-        public async Task<Person> GetAsync(int personId)
+        public async Task<Person> GetAsync(Guid personId)
         {
             return await _personService.GetPersonAsync(personId);
         }
@@ -33,7 +33,7 @@ namespace Rocket.Controllers
         }
 
         [HttpDelete]
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             await _personService.DeletePersonAsync(id);
         }

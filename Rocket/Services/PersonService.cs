@@ -13,27 +13,20 @@ namespace Rocket.Services
             _log = log;
         }
 
-        public async Task<Person> GetPersonAsync(int id)
+        public async Task<Person> GetPersonAsync(Guid id)
         {
 
             var allPersons = await _personDatabaseAccess.GetPersonsAsync();
-            return allPersons.ToList().Single(person => person.Id == id);
+            return allPersons.ToList().Single(person => person.Id.Equals(id));
         }
 
         public async Task<IEnumerable<Person>> GetPersonsByFirstName(string? firstName, string? lastName)
         {
-            // In eine schöne sehr schöne linq query umschreiben!
-            var persons = await _personDatabaseAccess.GetPersonsAsync();//.ToArray();
-            if (!string.IsNullOrEmpty(firstName))
-            {
-                persons = persons.Where(p => p.FirstName.Contains(firstName)).ToArray();
-            }
-
-            if (!string.IsNullOrEmpty(lastName))
-            {
-                persons = persons.Where(p => p.LastName.Contains(lastName)).ToArray();
-            }
-
+            // Können so firstName, lastName null sein?
+            var persons = await _personDatabaseAccess.GetPersonsAsync();
+            persons = persons.Where(x => !string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName))
+                     .Where(p => p.FirstName.Contains(firstName) && p.LastName.Contains(lastName))
+                     .ToArray();
             return persons;
         }
 
@@ -46,12 +39,12 @@ namespace Rocket.Services
 
         public async Task<Person> CreatePersonAsync(string firstName, string lastName)
         {
-            var item = new Person(0, firstName, lastName);
+            var item = new Person(Guid.NewGuid(), firstName, lastName);
             var addedPerson = await _personDatabaseAccess.AddPersonAsync(item);
             return addedPerson;
         }
 
-        public async Task DeletePersonAsync(int id)
+        public async Task DeletePersonAsync(Guid id)
         {
             await _personDatabaseAccess.RemovePersonAsync(await GetPersonAsync(id));
         }
