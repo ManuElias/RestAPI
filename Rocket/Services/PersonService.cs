@@ -39,7 +39,7 @@ namespace Rocket.Services
 
         public async Task<Person> CreatePersonAsync(string firstName, string lastName)
         {
-            var item = new Person(Guid.NewGuid(), firstName, lastName);
+            var item = new Person(Guid.Empty, firstName, lastName);
             var addedPerson = await _personDatabaseAccess.AddPersonAsync(item);
             return addedPerson;
         }
