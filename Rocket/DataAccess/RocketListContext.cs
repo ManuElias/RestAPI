@@ -12,9 +12,8 @@
 
         public Person AddPerson(Person person)
         {
-            var newPerson = person with { Id = _persons.Count };
-            _persons.Add(newPerson);
-            return newPerson;
+            _persons.Add(person);
+            return person;
         }
 
         public void RemovePerson(Person person)

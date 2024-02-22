@@ -35,10 +35,10 @@ public class PersonServiceTest
 
     private IEnumerable<Person> CreatePersons()
     {
-        yield return new Person(1, "Jonas", "Elias");
-        yield return new Person(2, "Matei", "Elias");
-        yield return new Person(3, "Aaaron", "Elias");
-        yield return new Person(4, "Michael", "Elias");
-        yield return new Person(5, "Linda", "Atalay");
+        yield return new Person(Guid.NewGuid(), "Jonas", "Elias");
+        yield return new Person(Guid.NewGuid(), "Matei", "Elias");
+        yield return new Person(Guid.NewGuid(), "Aaaron", "Elias");
+        yield return new Person(Guid.NewGuid(), "Michael", "Elias");
+        yield return new Person(Guid.NewGuid(), "Linda", "Atalay");
     }
 }
